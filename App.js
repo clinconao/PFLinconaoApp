@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native'
 import { useFonts } from 'expo-font'
 import { fonts } from "./src/global/fonts"
 import Navigator from './src/navigation/Navigator.js'
+import { Provider } from 'react-redux'
+import { store } from './src/app/store.js'
 
 export default function App() {
 
@@ -15,8 +17,10 @@ export default function App() {
 
   return (
     <> 
+    <Provider store={store}>
       <Navigator/>
-      <StatusBar style="auto" />
+      </Provider>
+      <StatusBar style="light"/>
     </>
   )
 }
