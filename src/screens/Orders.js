@@ -1,17 +1,22 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native'
-import orders from '../data/orders.json'
 import OrderItem from '../components/OrderItem.js'
+import { useGetOrdersByUserQuery } from '../services/shop.js'
 
 const Orders = () => {
-    return (
-        <View>
-            <FlatList
-                data={orders}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => <OrderItem item={item} />}
-            />
-        </View>
-    )
+
+  const {data:orders,isSuccess,isError,error,isLoading} = useGetOrdersByUserQuery("1")
+
+
+  if(isLoading) return <View><Text>cargando</Text></View>
+  return (
+    <View>
+      <FlatList
+        data={orders}
+        keyExtractor={(item)=> item.id}
+        renderItem={({item})=> <OrderItem item={item}/>}
+      />
+    </View>
+  )
 }
 
 export default Orders

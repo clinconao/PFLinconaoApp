@@ -1,16 +1,17 @@
 import { FlatList, StyleSheet } from 'react-native'
-import Category from './Category.js'
-import { useSelector } from 'react-redux'
+import Category from './Category'
+import { useGetCategoriesQuery } from '../services/shop'
+
 
 const Categories = () => {
-    const categories = useSelector(state => state.shop.categories)
-    return (
-        <FlatList
-            data={categories}
-            keyExtractor={item => item}
-            renderItem={({ item }) => <Category item={item} />}
-        />
-    )
+  const {data:categories} = useGetCategoriesQuery()
+  return (
+      <FlatList
+        data={categories}
+        keyExtractor={item => item}
+        renderItem={({item}) => <Category item={item} />}
+      />
+  )
 }
 
 export default Categories
