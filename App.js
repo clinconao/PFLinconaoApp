@@ -9,6 +9,8 @@ import { colors } from './src/global/color.js'
 import Login from './src/screens/Login.js'
 import Register from './src/screens/Register.js'
 import AuthStack from './src/navigation/AuthStack.js'
+import MyProfile from './src/screens/MyProfile'
+import ImageSelector from './src/screens/ImageSelector.js'
 
 
 export default function App() {
@@ -24,6 +26,7 @@ export default function App() {
     <> 
     <Provider store={store}>
       <Navigator/>
+      {/* <MyProfile/> */}
       </Provider>
       <StatusBar style="light" backgroundColor={colors.lightGray}/>
     </>
