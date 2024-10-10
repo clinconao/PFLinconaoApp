@@ -1,34 +1,37 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet } from 'react-native'
 import { useFonts } from 'expo-font'
-import { fonts } from "./src/global/fonts"
-import Navigator from './src/navigation/Navigator.js'
-import { Provider } from 'react-redux'
-import { store } from './src/app/store.js'
+import { fonts } from './src/global/fonts'
 import { colors } from './src/global/color.js'
-import Login from './src/screens/Login.js'
-import Register from './src/screens/Register.js'
-import AuthStack from './src/navigation/AuthStack.js'
+import MainNavigator from './src/navigation/MainNavigator'
+import { store } from './src/app/store'
+import { Provider } from 'react-redux'
+import Login from './src/screens/Login'
+import Register from './src/screens/Register'
+import AuthStack from './src/navigation/AuthStack'
 import MyProfile from './src/screens/MyProfile'
-import ImageSelector from './src/screens/ImageSelector.js'
-
+import ImageSelector from './src/screens/ImageSelector'
+import LocationSelector from './src/screens/LocationSelector'
+import { init } from './src/db'
 
 export default function App() {
 
+  
+  init()
+  
   const [fontLoaded] = useFonts(fonts)
-
 
   if(!fontLoaded){
     return null
-  }
+  } 
 
   return (
-    <> 
-    <Provider store={store}>
-      <Navigator/>
-      {/* <MyProfile/> */}
+    <>
+      <Provider store={store}>
+        <MainNavigator/>
+
       </Provider>
-      <StatusBar style="light" backgroundColor={colors.lightGray}/>
+      <StatusBar style="light" backgroundColor={colors.green3} />
     </>
   )
 }

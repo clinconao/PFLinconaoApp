@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Pressable } from 'react-native'
 import { colors } from '../global/color.js'
-import InputForm from '../components/InputForm.js'
-import SubmitButton from '../components/SubmitButton.js'
-import { useRegisterMutation } from '../services/auth.js'
+import InputForm from '../components/InputForm'
+import SubmitButton from '../components/SubmitButton'
+import { useRegisterMutation } from '../services/auth'
 import { useDispatch } from 'react-redux'
-import { setUser } from '../features/auth/authSlice.js'
+import { setUser } from '../features/auth/authSlice'
 import { registerSchema } from '../validations/registerSchema'
 
 const Register = ({navigation}) => {
@@ -15,12 +15,16 @@ const Register = ({navigation}) => {
     const [errorEmail,setErrorEmail] = useState("")
     const [errorPassword,setErrorPassword] = useState("")
     const [errorConfirmPassword,setErrorConfirmPassword] = useState("")
-    const [triggerRegister,{data,isSuccess}] = useRegisterMutation()
+    const [triggerRegister,{data,isSuccess,isError,error}] = useRegisterMutation()
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        if(isSuccess) console.log(data)
-    },[isSuccess])
+      if(isError) {
+        setErrorEmail("email existente")
+      }
+    },[isError])
+
+
 
     const onSubmit = async () => {
       try {
@@ -77,9 +81,9 @@ const Register = ({navigation}) => {
                 error={errorConfirmPassword}
             />
             <SubmitButton onPress={onSubmit} title="Registrarme"/>
-            <Text style={styles.sub}>ya tenes una cuenta?</Text>
+            <Text style={styles.sub}>Ya estas registrado?</Text>
             <Pressable onPress={()=> navigation.navigate("Login")} >
-                <Text style={styles.subLink}>Incio de sesion</Text>
+                <Text style={styles.subLink}>Inicia sesion</Text>
             </Pressable>
         </View>
     </View>
@@ -105,15 +109,12 @@ const styles = StyleSheet.create({
       },
       title:{
         fontSize:22,
-        fontFamily:"Lobster"
       },
       sub:{
         fontSize:14,
-        fontFamily:"Josefin"
       },
       subLink:{
         fontSize:14,
-        fontFamily:"Josefin",
         color:"blue"
       }
 })

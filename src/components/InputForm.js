@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 3,
         borderBottomColor: "white",
         padding: 2,
-        fontFamily: "Josefin",
         fontSize: 14,
         marginHorizontal: "5%",
         marginVertical: 10

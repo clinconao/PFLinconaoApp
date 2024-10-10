@@ -13,7 +13,7 @@ const ProductItem = ({product,handleProductDetailId}) => {
             <Image
                 style={styles.image}
                 resizeMode='cover'
-                source={{uri:product.thumbnail}} //aca puede ir la ruta desde assets o una url u otro
+                source={{uri:product.thumbnail}}
             />
         </Pressable>
     )
